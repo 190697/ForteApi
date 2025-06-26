@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using TareasApi.Entities;
 using TareasApi.Model;
+using TareasApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,9 @@ var configuration = builder.Configuration;
 // Se agrega conexion de EF Core con SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+// Se registra el repositorio de tareas
+builder.Services.AddScoped<ITareaRepository, TareaRepository>();
 
 // Habilitar CORS
 builder.Services.AddCors(options =>
