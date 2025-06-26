@@ -14,11 +14,19 @@ namespace TareasApi.Repositories
             _context = context;
         }
 
-        public async Task<Tarea> GetTareaById(int idTarea)
+        public async Task<ViewTarea> GetTareaById(int idTarea)
         {
-            return await _context.Tarea
-                .Include(t => t.Estatus)
-                .FirstOrDefaultAsync(t => t.Id == idTarea);
+            return await (from m in _context.Tarea
+                          where
+                              m.Id.Equals(idTarea)
+                          select new ViewTarea
+                          {
+                            Id = m.Id,
+                            Id_Estatus = m.Id_Estatus,
+                            Titulo = m.Titulo,
+                            Descripcion = m.Descripcion,
+                            Fecha_Registro = m.Fecha_Registro,
+                          }).FirstOrDefaultAsync();
         }
 
         public async Task<List<Tarea>> GetTareas()

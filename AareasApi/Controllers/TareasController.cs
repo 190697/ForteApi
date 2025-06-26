@@ -66,7 +66,7 @@ namespace TareasApi.Controllers
         {
             try
             {
-                Tarea search = await _tareaRepository.GetTareaById(id);
+                ViewTarea search = await _tareaRepository.GetTareaById(id);
 
                 if (search == null)
                     return NotFound("No se encontro tarea.");

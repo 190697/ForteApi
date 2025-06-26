@@ -5,7 +5,7 @@ namespace TareasApi.Repositories
 {
     public interface ITareaRepository
     {
-        Task<Tarea> GetTareaById(int idTarea);
+        Task<ViewTarea> GetTareaById(int idTarea);
         Task<List<Tarea>> GetTareas();
         Task<bool> AgregarTarea(Tarea tarea);
         Task<bool> ActualizarTarea(ViewTarea tarea);
